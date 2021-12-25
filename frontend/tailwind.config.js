@@ -5,7 +5,17 @@ module.exports = {
     content: ["./src/**/*.html", "./src/**/*.jsx", "./src/**/*.js"],
   },
   theme: {
-    extend: {},
+    extend: {
+      minHeight: {
+        '93p': '93vh',
+      },
+      container: {
+        center: true,
+      },
+      fontFamily: {
+        'roboto': ['"Roboto"', 'cursive']
+      }
+    },
   },
   variants: {},
   plugins: [],
