@@ -16,18 +16,18 @@ export default function Navbar({ fixed }) {
         <div className="container px-2 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex  lg:w-auto lg:static lg:block justify-start gap-2">
             <div className="flex gap-3 lg:space-x-56 ">
-              <a className="text-lg items-center font-bold leading-relaxed inline-block  whitespace-nowrap  text-white">
+              <span className="text-lg items-center font-bold leading-relaxed inline-block  whitespace-nowrap  text-white">
                 <Link to="/">MyDiary</Link>
-              </a>
+              </span>
               <div className=" ">
                 <form
                   action=""
-                  class="flex justify-center bg-white border-1 overflow-hidden rounded-sm  "
+                  className="flex justify-center bg-white border-1 overflow-hidden rounded-sm  "
                 >
                   <input
                     type="search"
                     placeholder="Search"
-                    class="block rounded-md border-0 focus:outline-none focus:ring-0 focus:border-gray-800 w-48 "
+                    className="block rounded-md border-0 focus:outline-none focus:ring-0 focus:border-gray-800 w-48 "
                   ></input>
                   <button
                     className="rounded-full bg-gray-400 w-8 h-8 pl-1 pt-1 flex justify-items-center"
@@ -37,13 +37,13 @@ export default function Navbar({ fixed }) {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       stroke="currentColor"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       viewBox="0 0 24 24"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="m21 21-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"
                       />
                     </svg>
@@ -61,13 +61,13 @@ export default function Navbar({ fixed }) {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 stroke="currentColor"
-                class="h-6 w-6"
+                className="h-6 w-6"
                 viewBox="0 0 24 24"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
@@ -84,9 +84,7 @@ export default function Navbar({ fixed }) {
               <li className="nav-item">
                 <Menu as="div" className="relative inline-block text-left">
                   <Menu.Button className="inline-flex justify-center w-full  px-6 py-2 text-sm font-medium text-gray-200">
-                    <button>
-                      <Link to="/mynotes">MyPages</Link>{" "}
-                    </button>
+                    <Link to="/mynotes">MyPages</Link>{" "}
                   </Menu.Button>
                 </Menu>
               </li>
