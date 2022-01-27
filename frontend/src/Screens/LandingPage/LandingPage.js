@@ -1,7 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "../../components/button/Button";
 
 const LandingPage = () => {
+  // useEffect(() => {
+  //   const userInfo = localStorage.getItem("userInfo");
+  //   if (userInfo) {
+  //     history.push("/mynotes");
+  //   }
+  // }, [history]);
+
   return (
     <div
       className="flex bg-center bg-scroll items-center min-h-93p"
@@ -15,8 +23,12 @@ const LandingPage = () => {
           One safe place for all your thoughts
         </span>
         <div className="space-x-10 mt-5 lg:text-xl flex justify-evenly">
-          <Button className="lg:h-16 lg:w-40 text-white">Log in</Button>
-          <Button className="text-white lg:h-16 lg:w-40  ">Sign Up</Button>
+          <Link to="/login">
+            <Button className="lg:h-16 lg:w-40 text-white">Log in</Button>
+          </Link>
+          <Link to="/register">
+            <Button className="text-white lg:h-16 lg:w-40  ">Sign Up</Button>
+          </Link>
         </div>
       </div>
     </div>

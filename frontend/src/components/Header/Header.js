@@ -2,7 +2,7 @@ import React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -10,6 +10,7 @@ function classNames(...classes) {
 
 export default function Navbar({ fixed }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const history = useNavigate()
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-4 bg-gray-600 shadow-lg  ">
@@ -19,35 +20,35 @@ export default function Navbar({ fixed }) {
               <span className="text-lg items-center font-bold leading-relaxed inline-block  whitespace-nowrap  text-white">
                 <Link to="/">MyDiary</Link>
               </span>
-              <div className=" ">
-                <form
-                  action=""
-                  className="flex justify-center bg-white border-1 overflow-hidden rounded-sm  "
-                >
-                  <input
-                    type="search"
-                    placeholder="Search"
-                    className="block rounded-md border-0 focus:outline-none focus:ring-0 focus:border-gray-800 w-48 "
-                  ></input>
-                  <button
-                    className="rounded-full bg-gray-400 w-8 h-8 pl-1 pt-1 flex justify-items-center"
-                    type="submit"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      stroke="currentColor"
-                      className="h-6 w-6"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m21 21-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"
-                      />
-                    </svg>
-                  </button>
+              <div className="ml-10 lg:ml-0">
+                <form method="GET">
+                  <div className="relative text-gray-+00 focus-within:text-gray-400">
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+                      <button
+                        type="submit"
+                        className="p-1 focus:outline-none focus:shadow-outline"
+                      >
+                        <svg
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                          class="w-6 h-6"
+                        >
+                          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                      </button>
+                    </span>
+                    <input
+                      type="search"
+                      name="q"
+                      className="py-2 text-sm text-white bg-gray-700 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+                      placeholder="Search..."
+                      autocomplete="off"
+                    />
+                  </div>
                 </form>
               </div>
             </div>
@@ -127,11 +128,15 @@ export default function Navbar({ fixed }) {
                           )}
                         </Menu.Item>
 
-                        <form method="POST" action="#">
+                        
                           <Menu.Item>
                             {({ active }) => (
                               <button
                                 type="submit"
+                                onClick={() => {localStorage.removeItem("userInfo");
+                                history.push("/login");}
+                              }
+                                
                                 className={classNames(
                                   active
                                     ? "bg-gray-100 text-gray-900"
@@ -143,7 +148,7 @@ export default function Navbar({ fixed }) {
                               </button>
                             )}
                           </Menu.Item>
-                        </form>
+                        
                       </div>
                     </Menu.Items>
                   </Transition>
