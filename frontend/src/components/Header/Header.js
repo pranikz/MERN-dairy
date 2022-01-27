@@ -10,7 +10,7 @@ function classNames(...classes) {
 
 export default function Navbar({ fixed }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-  const history = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-4 bg-gray-600 shadow-lg  ">
@@ -133,8 +133,8 @@ export default function Navbar({ fixed }) {
                             {({ active }) => (
                               <button
                                 type="submit"
-                                onClick={() => {localStorage.removeItem("userInfo");
-                                history.push("/login");}
+                                onClick={() => {
+                                navigate("/");}
                               }
                                 
                                 className={classNames(

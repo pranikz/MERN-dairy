@@ -46,12 +46,13 @@ const Registerpage = () => {
   };
 
   const postDetails = (pics) => {
+      console.log("abc", pics)
     if (!pics) {
       return setPicMessage("select am Image");
     }
     setPicMessage(null);
 
-    if (pics.type === "image/jpg" || pics.type === "image/png") {
+    if (pics.type === "image/jpg" || pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "merndairy");
