@@ -1,8 +1,11 @@
+// eslint-disable-next-line
 import React, { useState, useEffect } from "react";
 import MainScreen from "../../components/MainScreen";
-import axios from "axios";
 import Loading from "../../components/loader/Loading";
 import Error from "../../components/alert/Error";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../actions/userActions";
+import { useNavigate } from "react-router-dom";
 
 const Registerpage = () => {
   const [email, setEmail] = useState("");
@@ -14,45 +17,30 @@ const Registerpage = () => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [picMessage, setPicMessage] = useState(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmpassword) {
-      setMessage(`Passwords don't match`);
-    } else {
-      setMessage(null);
-      try {
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-        };
-        setLoading(true);
-
-        const { data } = await axios.post(
-          "/api/users",
-          { name, pic, email, password },
-          config
-        );
-        setLoading(false);
-        localStorage.setItem("userInfo", JSON.stringify(data));
-      } catch (error) {
-        setError(error.response.data.message);
-        setLoading(false);
-      }
-    }
+      setMessage("Passwords do not match");
+    } else dispatch(register(name, email, password, pic));
   };
-
   const postDetails = (pics) => {
-      console.log("abc", pics)
+    console.log("abc", pics);
     if (!pics) {
       return setPicMessage("select am Image");
     }
     setPicMessage(null);
 
-    if (pics.type === "image/jpg" || pics.type === "image/jpeg" || pics.type === "image/png") {
+    if (
+      pics.type === "image/jpg" ||
+      pics.type === "image/jpeg" ||
+      pics.type === "image/png"
+    ) {
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "merndairy");
@@ -70,9 +58,17 @@ const Registerpage = () => {
           console.log(err);
         });
     } else {
-        return(setPicMessage("Please select an Image"))
+      return setPicMessage("Please select an Image");
     }
   };
+   // eslint-disable-next-line
+   useEffect(() => {
+    // eslint-disable-next-line
+    if (userInfo) {
+      navigate("/mynotes");
+    }
+    // eslint-disable-next-line
+  }, [userInfo]);
 
   return (
     <MainScreen title="Register">
@@ -121,11 +117,11 @@ const Registerpage = () => {
               className="border rounded py-2 px-3 w-full focus:outline-none focus:shadow-outline"
             />
           </div>
-        {picMessage && <Error>{picMessage}</Error>}
+          {picMessage && <Error>{picMessage}</Error>}
           <div className="py-2">
             <label
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              for="user_avatar"
+              htmlFor="user_avatar"
             >
               Upload Image
             </label>

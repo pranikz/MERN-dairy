@@ -3,6 +3,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../actions/userActions";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -11,6 +13,17 @@ function classNames(...classes) {
 export default function Navbar({ fixed }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  // eslint-disable-next-line
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-4 bg-gray-600 shadow-lg  ">
@@ -21,7 +34,7 @@ export default function Navbar({ fixed }) {
                 <Link to="/">MyDiary</Link>
               </span>
               <div className="ml-10 lg:ml-0">
-                <form method="GET">
+                <form>
                   <div className="relative text-gray-+00 focus-within:text-gray-400">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                       <button
@@ -31,11 +44,11 @@ export default function Navbar({ fixed }) {
                         <svg
                           fill="none"
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           viewBox="0 0 24 24"
-                          class="w-6 h-6"
+                          className="w-6 h-6"
                         >
                           <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
@@ -46,7 +59,7 @@ export default function Navbar({ fixed }) {
                       name="q"
                       className="py-2 text-sm text-white bg-gray-700 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
                       placeholder="Search..."
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                   </div>
                 </form>
@@ -128,27 +141,22 @@ export default function Navbar({ fixed }) {
                           )}
                         </Menu.Item>
 
-                        
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                type="submit"
-                                onClick={() => {
-                                navigate("/");}
-                              }
-                                
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "block w-full text-left px-4 py-2 text-sm"
-                                )}
-                              >
-                                Log out
-                              </button>
-                            )}
-                          </Menu.Item>
-                        
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              type="submit"
+                              onClick={logoutHandler}
+                              className={classNames(
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "block w-full text-left px-4 py-2 text-sm"
+                              )}
+                            >
+                              Log out
+                            </button>
+                          )}
+                        </Menu.Item>
                       </div>
                     </Menu.Items>
                   </Transition>

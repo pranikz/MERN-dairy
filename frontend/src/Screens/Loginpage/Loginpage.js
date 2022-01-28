@@ -1,47 +1,34 @@
+// eslint-disable-next-line
 import React, { useState, useEffect } from "react";
 import MainScreen from "../../components/MainScreen";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Buttonalt from "../../components/button/Buttonalt";
-import axios from "axios";
 import Loading from "../../components/loader/Loading";
-import { useHistory } from "react-router-dom";
 import Error from "../../components/alert/Error";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/userActions";
 
-
-const Loginpage = ({ history }) => {
+const Loginpage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+  const navigate =useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      setLoading(true);
-      const { data } = await axios.post(
-        "/api/users/login",
-        {
-          email,
-          password,
-        },
-        config
-      );
-      console.log(data);
-      localStorage.setItem("userInfo", JSON.stringify());
-
-      setLoading(false);
-    } catch (error) {
-      setError(error.response.data.message);
-      setLoading(false);
-    }
+    dispatch(login(email, password));
   };
+  // eslint-disable-next-line
+  useEffect(() => {
+    // eslint-disable-next-line
+    if(userInfo){
+      navigate('/mynotes');
+    }
+    // eslint-disable-next-line
+  }, [userInfo]);
+  
 
   return (
     <MainScreen title="Login">
