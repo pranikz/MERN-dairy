@@ -10,7 +10,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar({ fixed }) {
+export default function Navbar({ setSearch }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const navigate = useNavigate();
 
@@ -28,12 +28,12 @@ export default function Navbar({ fixed }) {
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-4 bg-gray-600 shadow-lg  ">
         <div className="container px-2 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex  lg:w-auto lg:static lg:block justify-start gap-2">
-            <div className="flex gap-3 lg:space-x-56 ">
+          <div className="w-full relative flex justify-evenly lg:w-auto lg:static lg:block  gap-2">
+            <div className="flex  md:space-x-16 lg:space-x-56  ">
               <span className="text-lg items-center font-bold leading-relaxed inline-block  whitespace-nowrap  text-white">
                 <Link to="/">MyDiary</Link>
               </span>
-              <div className="ml-10 lg:ml-0">
+              <div className="ml-5 md:ml-0">
                 <form>
                   <div className="relative text-gray-+00 focus-within:text-gray-400">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -60,6 +60,7 @@ export default function Navbar({ fixed }) {
                       className="py-2 text-sm text-white bg-gray-700 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
                       placeholder="Search..."
                       autoComplete="off"
+                      onChange={(e) => setSearch(e.target.value)}
                     />
                   </div>
                 </form>
@@ -87,7 +88,7 @@ export default function Navbar({ fixed }) {
               </svg>
             </button>
           </div>
-          <div
+          {userInfo ? <div
             className={
               "flex justify-start lg:flex flex-grow " +
               (navbarOpen ? " flex" : " hidden")
@@ -106,7 +107,7 @@ export default function Navbar({ fixed }) {
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <Menu.Button className="inline-flex justify-center w-full   px-6 py-2 text-sm font-medium text-gray-200">
-                      Pratyush Mahapatra
+                      {userInfo?.name}
                       <ChevronDownIcon
                         className="-mr-1 ml-2 h-5 w-5"
                         aria-hidden="true"
@@ -160,10 +161,11 @@ export default function Navbar({ fixed }) {
                       </div>
                     </Menu.Items>
                   </Transition>
+                  
                 </Menu>
               </li>
             </ul>
-          </div>
+          </div> : <span className="text-gray-100"> <Link to="/login">Login</Link> </span> }
         </div>
       </nav>
     </>

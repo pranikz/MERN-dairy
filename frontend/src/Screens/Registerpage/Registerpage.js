@@ -30,7 +30,7 @@ const Registerpage = () => {
     } else dispatch(register(name, email, password, pic));
   };
   const postDetails = (pics) => {
-    console.log("abc", pics);
+    // console.log("abc", pics);
     if (!pics) {
       return setPicMessage("select am Image");
     }
@@ -51,7 +51,7 @@ const Registerpage = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setPic(data.url.toString());
         })
         .catch((err) => {

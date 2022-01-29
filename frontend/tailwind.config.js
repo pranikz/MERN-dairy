@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       minHeight: {
-        "93p": "93vh",
+        "93p": "75vh",
       },
       container: {
         center: true,
