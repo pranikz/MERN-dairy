@@ -67,7 +67,7 @@ export default function Navbar({ setSearch }) {
               </div>
             </div>
 
-            <button
+            {userInfo ? <button
               className="bg-gray-400 text-white cursor-pointer text-xl leading-none px-2 py-0 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
               type="button"
               onClick={() => setNavbarOpen(!navbarOpen)}
@@ -86,7 +86,7 @@ export default function Navbar({ setSearch }) {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-            </button>
+            </button>: <span className="text-gray-100 lg:hidden "> <Link to="/login">Login</Link> </span> }
           </div>
           {userInfo ? <div
             className={
@@ -165,7 +165,7 @@ export default function Navbar({ setSearch }) {
                 </Menu>
               </li>
             </ul>
-          </div> : <span className="text-gray-100"> <Link to="/login">Login</Link> </span> }
+          </div> : <span className="text-gray-100 hidden lg:block"> <Link to="/login">Login</Link> </span> }
         </div>
       </nav>
     </>
