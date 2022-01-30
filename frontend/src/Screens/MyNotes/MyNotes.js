@@ -89,7 +89,7 @@ const MyNotes = ({ search }) => {
                     </Disclosure>
                   </div>
 
-                  <span className="bg-yellow-500 text-yellow-50  py-1 px-2 rounded text-xs font-bold ml-1">
+                  <span className="bg-red-400  py-1 px-2 rounded text-xs font-bold ml-1">
                     {note.category}
                   </span>
                   <hr className="my-4 " />
