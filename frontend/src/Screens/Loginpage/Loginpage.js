@@ -67,7 +67,7 @@ const Loginpage = () => {
         </form>
       </div>
       New user?{" "}
-      <Buttonalt className="bg-green-500 hover:bg-green-700 rounded-lg mx-2">
+      <Buttonalt className="bg-green-500 hover:bg-green-700 rounded-lg xl:w-40 xl:h-12 mx-2">
         <Link to="/register">Register</Link>{" "}
       </Buttonalt>
       here

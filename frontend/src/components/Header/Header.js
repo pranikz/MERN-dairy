@@ -30,11 +30,11 @@ export default function Navbar({ setSearch }) {
         <div className="container px-2 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-evenly lg:w-auto lg:static lg:block  gap-2">
             <div className="flex  md:space-x-16 lg:space-x-56  ">
-              <span className="text-lg items-center font-bold leading-relaxed inline-block  whitespace-nowrap  text-white">
+              <span className="text-xl items-center font-bold leading-relaxed inline-block  whitespace-nowrap  text-white">
                 <Link to="/">MyDiary</Link>
               </span>
-              <div className="ml-5 md:ml-0">
-                <form>
+         {userInfo ?     <div className="ml-5 md:ml-0">
+               <form>
                   <div className="relative text-gray-+00 focus-within:text-gray-400">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                       <button
@@ -62,9 +62,9 @@ export default function Navbar({ setSearch }) {
                       autoComplete="off"
                       onChange={(e) => setSearch(e.target.value)}
                     />
-                  </div>
+                  </div> 
                 </form>
-              </div>
+              </div>: <div className="mr-36 md:ml-0" >.</div>}
             </div>
 
             {userInfo ? <button
@@ -86,7 +86,7 @@ export default function Navbar({ setSearch }) {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-            </button>: <span className="text-gray-100 lg:hidden "> <Link to="/login">Login</Link> </span> }
+            </button>: <span className="text-gray-100 lg:hidden mt-1 "> <Link to="/login">Login</Link> </span> }
           </div>
           {userInfo ? <div
             className={
