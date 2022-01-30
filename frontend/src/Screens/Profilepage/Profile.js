@@ -115,7 +115,7 @@ const Profile = () => {
               {picMessage && <Error>{picMessage}</Error>}
               <div className="py-4">
                 <label
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  className="block mb-2  font-medium text-gray-900 dark:text-gray-300"
                   htmlFor="user_avatar"
                 >
                   Upload Image
